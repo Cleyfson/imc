@@ -4,6 +4,7 @@ class Person {
   _weight; // float type
   _height; // float type
   _imc; // float type
+  _imcLevel; // string value
   static personCount = 0;
 
   constructor(name, age, weight, height) {
@@ -12,6 +13,7 @@ class Person {
     this._weight = weight;
     this._height = height;
     this._imc = (this._weight / (this._height * this._height)).toFixed(2);
+    this._imcLevel = this.imcLevel();
     Person.personCount += 1;
   }
 
