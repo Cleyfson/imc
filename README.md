@@ -1,6 +1,6 @@
 ## About the project:
 
-card-game
+this project is an application made in order to develop and deepen my skills with mvc architectural/design pattern. Applying in practice the knowledge for the development of a imc-calculator.
 
 ## Layout of the Application:
 
@@ -25,7 +25,7 @@ card-game
 ```bash
 
 # Clone the Repository
-$ git clone https://github.com/Cleyfson/drive.git
+$ git clone https://github.com/Cleyfson/imc.git
 
 # Enter the poject folder in the Terminal
 $ cd drive
