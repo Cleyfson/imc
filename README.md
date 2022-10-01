@@ -28,7 +28,7 @@ this project is an application made in order to develop and deepen my skills wit
 $ git clone https://github.com/Cleyfson/imc.git
 
 # Enter the poject folder in the Terminal
-$ cd drive
+$ cd imc
 
 # Install all the dependencies
 $ npm install
