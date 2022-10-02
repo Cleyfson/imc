@@ -33,19 +33,6 @@ class PersonController {
     this._messageView.update(this._message);
   }
 
-  add(event) {
-    event.preventDefault();
-
-    const newPerson = this._createPerson();
-    this._personList.add(newPerson);
-
-    this._personRepository.create(newPerson);
-    this._personView.update(this._personList);
-
-    this._message.text = 'Pessoa cadastrada com sucesso!';
-    this._messageView.update(this._message);
-  }
-
   _createPerson() {
     return new Person(
       this._inputName.value,
@@ -62,6 +49,55 @@ class PersonController {
       (this._inputHeight.value = '');
 
     this._inputName.focus();
+  }
+
+  addForm(name, age, weight, height) {
+    this._inputName.value = name;
+    this._inputAge.value = age;
+    this._inputWeight.value = weight;
+    this._inputHeight.value = height;
+  }
+
+  add(event) {
+    event.preventDefault();
+
+    const id = document.querySelector('#idPerson').value;
+
+    if (!id) {
+      const newPerson = this._createPerson();
+      this._personList.add(newPerson);
+
+      this._personRepository.create(newPerson);
+      this._personView.update(this._personList);
+
+      this._message.text = 'Pessoa cadastrada com sucesso!';
+      this._messageView.update(this._message);
+    } else {
+      this.update(id);
+    }
+  }
+
+  update(id) {
+    let updatedPerson = this._createPerson();
+
+    this._personRepository.update(id, updatedPerson);
+    this._personList.update(id, updatedPerson);
+    this._personView.update(this._personList);
+    document.querySelector('#idPerson').value = null;
+  }
+
+  delete(id) {
+    if (!id) {
+      return;
+    }
+    this._personList.remove(id);
+    this._personView.update(this._personList);
+    this._personRepository.delete(id);
+  }
+
+  findId(id) {
+    let searchedPerson = this._personRepository.findId(id);
+    return searchedPerson;
   }
 }
 
