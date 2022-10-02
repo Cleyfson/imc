@@ -1,16 +1,18 @@
-class MessageView {
+import View from './View';
+
+class MessageView extends View {
   constructor(element) {
-    this._element = element;
+    super(element);
   }
 
-  _template(model) {
+  template(model) {
     return model.text
       ? `<p class='alert alert-success'>${model.text}</p>`
       : `<p></p>`;
   }
 
   update(model) {
-    this._element.insertAdjacentHTML('afterbegin', this._template(model));
+    this._element.insertAdjacentHTML('afterbegin', this.template(model));
     setTimeout(() => (this._element.innerHTML = ''), 3000);
   }
 }

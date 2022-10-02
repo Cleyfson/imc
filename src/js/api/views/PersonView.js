@@ -1,9 +1,11 @@
-class PersonView {
+import View from './View';
+
+class PersonView extends View {
   constructor(element) {
-    this._element = element;
+    super(element);
   }
 
-  _template(model) {
+  template(model) {
     return `
           <table>
               <thead>
@@ -33,10 +35,6 @@ class PersonView {
               </tbody>
           </table>
       `;
-  }
-
-  update(model) {
-    this._element.insertAdjacentHTML('afterbegin', this._template(model));
   }
 }
 
