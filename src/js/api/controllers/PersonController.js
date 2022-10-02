@@ -5,6 +5,8 @@ import PersonView from '../views/PersonView';
 import Message from '../models/Message';
 import MessageView from '../views/MessageView';
 
+import PersonRepository from '../repositories/PersonRepository';
+
 class PersonController {
   _inputName;
   _inputAge;
@@ -17,7 +19,12 @@ class PersonController {
     this._inputWeight = document.querySelector('#weight');
     this._inputHeight = document.querySelector('#height');
 
-    this._personList = new PersonList();
+    this._personRepository = new PersonRepository();
+    console.log(this._personRepository);
+    let list = this._personRepository.read();
+    console.log(list);
+
+    this._personList = new PersonList(list);
     this._personView = new PersonView(document.querySelector('#data'));
     this._personView.update(this._personList);
 
@@ -29,7 +36,10 @@ class PersonController {
   add(event) {
     event.preventDefault();
 
-    this._personList.add(this._createPerson());
+    const newPerson = this._createPerson();
+    this._personList.add(newPerson);
+
+    this._personRepository.create(newPerson);
     this._personView.update(this._personList);
 
     this._message.text = 'Pessoa cadastrada com sucesso!';

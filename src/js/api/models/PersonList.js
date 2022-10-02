@@ -1,6 +1,6 @@
 class PersonList {
-  constructor() {
-    this._personList = [];
+  constructor(list = []) {
+    this._personList = list;
   }
 
   add(person) {

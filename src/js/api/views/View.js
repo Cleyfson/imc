@@ -8,7 +8,7 @@ class View {
   }
 
   update(model) {
-    this._element.insertAdjacentHTML('afterbegin', this.template(model));
+    this._element.innerHTML = this.template(model);
   }
 }
 
