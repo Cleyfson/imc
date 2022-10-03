@@ -1,4 +1,5 @@
 import PersonController from './src/js/api/controllers/PersonController';
+import ModalHelper from './src/js/api/helpers/ModalHelper';
 
 let personController = new PersonController();
 
@@ -6,6 +7,10 @@ let form = document.querySelector('#form');
 
 form.addEventListener('submit', (event) => {
   personController.add(event);
+
+  ModalHelper.hideButtons();
+  ModalHelper.modal('Cadastro', 'Pessoa cadastrada ou atualizada!');
+
   personController._cleanForm();
 });
 
@@ -20,11 +25,14 @@ formDeleteEdit.addEventListener('submit', (event) => {
 btnDelete.addEventListener('click', () => {
   let id = document.querySelector('#id').value;
   document.querySelector('#id').value = null;
-  openModal(`Deseja apagar o registro ${id} ? `);
+
+  ModalHelper.showButtons();
+  ModalHelper.modal('Apagar registro', `Deseja apagar o registro ${id} ?`);
 
   document.querySelector('#yes').addEventListener('click', () => {
     personController.delete(id);
-    closeModal();
+    id = null;
+    ModalHelper.closeModal();
   });
 });
 
@@ -39,8 +47,6 @@ btnEdit.addEventListener('click', () => {
 
   let id = document.querySelector('#id').value;
 
-  console.log('Editar registro' + id);
-
   document.querySelector('#idPerson').value = id;
   document.querySelector('#id').value = null;
 
@@ -51,14 +57,4 @@ btnEdit.addEventListener('click', () => {
   }
 });
 
-const openModal = (message) => {
-  document.querySelector('#modal').classList.add('active');
-  document.querySelector('#messageModal').innerHTML = `<h2>${message}</h2>`;
-};
-
-const closeModal = () => {
-  document.querySelector('#modal').classList.remove('active');
-};
-
-document.querySelector('#modalClose').addEventListener('click', closeModal);
-document.querySelector('#no').addEventListener('click', closeModal);
+ModalHelper.closeWindow();

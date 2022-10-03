@@ -2,8 +2,11 @@ import Person from '../models/Person';
 import PersonList from '../models/PersonList';
 import PersonView from '../views/PersonView';
 
-import Message from '../models/Message';
-import MessageView from '../views/MessageView';
+// import Message from '../models/Message';
+// import MessageView from '../views/MessageView';
+
+import { Modal } from '../models/Modal';
+import { ModalView } from '../views/ModalView';
 
 import PersonRepository from '../repositories/PersonRepository';
 
@@ -20,17 +23,19 @@ class PersonController {
     this._inputHeight = document.querySelector('#height');
 
     this._personRepository = new PersonRepository();
-    console.log(this._personRepository);
     let list = this._personRepository.read();
-    console.log(list);
 
     this._personList = new PersonList(list);
     this._personView = new PersonView(document.querySelector('#data'));
     this._personView.update(this._personList);
 
-    this._message = new Message();
-    this._messageView = new MessageView(document.querySelector('#message'));
-    this._messageView.update(this._message);
+    // this._message = new Message();
+    // this._messageView = new MessageView(document.querySelector('#message'));
+    // this._messageView.update(this._message);
+
+    this._modal = new Modal();
+    this._modalView = new ModalView(document.querySelector('#messageModal'));
+    this._modalView.update(this._modal);
   }
 
   _createPerson() {
@@ -66,12 +71,12 @@ class PersonController {
     if (!id) {
       const newPerson = this._createPerson();
       this._personList.add(newPerson);
-
       this._personRepository.create(newPerson);
       this._personView.update(this._personList);
 
-      this._message.text = 'Pessoa cadastrada com sucesso!';
-      this._messageView.update(this._message);
+      this._modalView.update(this._modal);
+      // this._message.text = 'Pessoa cadastrada com sucesso!';
+      // this._messageView.update(this._message);
     } else {
       this.update(id);
     }
