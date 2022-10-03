@@ -1,6 +1,6 @@
 ## About the project:
 
-this project is an application made in order to develop and deepen my skills with mvc architectural/design pattern. Applying in practice the knowledge for the development of a imc-calculator.
+this project is an application made in order to develop and deepen my skills with mvc architectural/design pattern. Applying in practice the knowledge for the development of a bmi-calculator.
 
 ## Layout of the Application:
 
